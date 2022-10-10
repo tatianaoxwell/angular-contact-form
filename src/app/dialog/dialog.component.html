@@ -1,44 +1,66 @@
-<h1 mat-dialog-title>Product Detail</h1>
-<div mat-dialog-content>
-	<mat-form-field appearance="outline">
-		<mat-label>Product Name</mat-label>
-		<input matInput placeholder="Name">
-		<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+<h1 mat-dialog-title>Sign Up!</h1>
+<form class="form" mat-dialog-content [formGroup]="signupForm">
+	<mat-form-field class="form__group" appearance="outline">
+		<mat-label class="form__group-title">First Name</mat-label>
+		<input class="form__group-input" matInput placeholder="First Name (required)" formControlName="firstName">
+		<mat-icon matSuffix></mat-icon>
 	</mat-form-field>
-	<mat-form-field appearance="outline">
-		<mat-label>Product Category</mat-label>
-		<mat-select placeholder="Category">
-			<mat-option value="Electronics">Electronics</mat-option>
-			<mat-option value="Clothing">Clothing</mat-option>
-			<mat-option value="Kitchen">Kitchen</mat-option>
-		</mat-select>
+	<mat-form-field class="form__group" appearance="outline">
+		<mat-label class="form__group-title">Last Name</mat-label>
+		<input class="form__group-input" formControlName="lastName" matInput placeholder="Last Name (required)"
+			   required>
+		<mat-icon matSuffix></mat-icon>
 	</mat-form-field>
-	<mat-form-field appearance="outline">
-		<mat-label>Choose a date</mat-label>
-		<input matInput [matDatepicker]="picker">
-		<mat-hint>MM/DD/YYYY</mat-hint>
-		<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-		<mat-datepicker #picker></mat-datepicker>
+	<form formGroupName="emailGroup">
+		<mat-form-field class="form__group" appearance="outline">
+			<mat-label class="form__group-title">Email</mat-label>
+			<input class="form__group-input" formControlName="email" matInput placeholder="Email">
+			<mat-icon matSuffix></mat-icon>
+		</mat-form-field>
+		<mat-form-field class="form__group" appearance="outline">
+			<mat-label class="form__group-title">Confirm Email</mat-label>
+			<input class="form__group-input" formControlName="confirmEmail" matInput placeholder="Confirm Email">
+			<!-- <mat-error *ngIf="emailGroupCtrl.controls.email.errors?.required">
+				Confirmation email is <strong>required</strong>
+			</mat-error>
+		<mat-error *ngIf="emailGroupCtrl.hasError('emailValidator')" >
+				The confirmation does not match the email address. 
+			</mat-error> -->
+			<mat-icon matSuffix></mat-icon>
+		</mat-form-field>
+	</form>
+	<mat-form-field class="form__group" appearance="outline">
+		<mat-label class="form__group-title">Mobile Number</mat-label>
+		<input class="form__group-input" formControlName="mobileNumber" matInput placeholder="Name">
+		<mat-icon matSuffix></mat-icon>
 	</mat-form-field>
-	<div class="stock-radio-group-label">
-		<label id="stock-radio-group-label">
-			<p>Is it a low stock product?</p>
+	<div class="form__group">
+		<label class="form__group-title">
+			<p>Send Notifications</p>
 		</label>
-		<mat-radio-group class="stock-radio-group" aria-label="Select an option">
-			<mat-radio-button class="stock-radio-button" value="yes">Yes</mat-radio-button>
-			<mat-radio-button class="stock-radio-button" value="no">No</mat-radio-button>
+		<mat-radio-group class="form__group" aria-label="Select an option" formControlName="notification">
+			<mat-radio-button class="form__radio" value="email">Email</mat-radio-button>
+			<br>
+			<mat-radio-button class="form__radio" value="text">Text</mat-radio-button>
 		</mat-radio-group>
 	</div>
-	<mat-form-field appearance="outline">
-		<mat-label>Price</mat-label>
-		<input matInput type="number" placeholder="Price">
+	<mat-form-field class="form__group form__group-rating-field" appearance="outline">
+		<mat-label class="form__group-rating">Rate your experience with us on a scale of 1 (poor) to 5 (great):
+		</mat-label>
+		<input matInput type="number" placeholder="Rating" formControlName="rating">
+		<mat-error *ngIf="ratingCtrl.hasError('ratingValidator') && !ratingCtrl.hasError('required')">
+			Please enter a valid rating between 1 and 5.
+		</mat-error>
+		<mat-error *ngIf="ratingCtrl.hasError('required')">
+			Rating is <strong>required</strong>
+		</mat-error>
 	</mat-form-field>
-	<mat-form-field class="example-full-width" appearance="outline">
-		<mat-label>Comment</mat-label>
-		<textarea matInput placeholder="Extra information"></textarea>
-	  </mat-form-field>
-</div>
-<mat-dialog-actions >
-    <button class="mat-raised-button" (click)="onClose()">Close</button>
-    <button class="mat-raised-button mat-primary"(click)="onSave()">Save</button>
-</mat-dialog-actions>
+	<section class="form__group" class="example-section">
+		<mat-checkbox class="form__checkbox" formControlName="sendCatalog">Send me your catalog</mat-checkbox>
+	</section>
+	<mat-dialog-actions class="form__group">
+		<button mat-raised-button color="primary" type="button" class="form__button" (click)="onClose()">Close</button>
+		<button mat-raised-button color="primary" type="button" class="form__button" [disabled]="!signupForm.valid"
+				(click)="onSave()">Save</button>
+	</mat-dialog-actions>
+</form>

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -37,7 +38,8 @@ import { DialogComponent } from './dialog/dialog.component';
 	MatSelectModule,
 	MatDatepickerModule,
 	MatNativeDateModule,
-	MatRadioModule
+	MatRadioModule,
+	MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
