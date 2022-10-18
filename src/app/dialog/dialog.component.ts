@@ -7,6 +7,7 @@ import {
 	ValidatorFn,
 	Validators
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -17,7 +18,13 @@ import { tap } from 'rxjs/operators';
 })
 export class DialogComponent implements OnInit {
   signupForm!: FormGroup;
-  constructor() {}
+  ratingMessage: string = '';
+ 
+  private validationMessages: any = {
+	required: 'Rating is <strong>required</strong>.',
+	ratingValidator: 'Please enter a valid rating between 1 and 5.'
+  }
+  constructor(private router: Router ) {}
 
   get firstNameCtrl(): FormControl {
     return this.signupForm.controls['firstName'] as FormControl;
@@ -93,6 +100,14 @@ export class DialogComponent implements OnInit {
     this.mobileNumberCtrl.updateValueAndValidity();
   }
 
+  setMessage(c: AbstractControl): void {
+	this.ratingMessage = '';
+	if((c.touched || c.dirty) && c.errors) {
+		this.ratingMessage = Object.keys(c.errors).map(
+			key => this.validationMessages[key]
+		).join('');
+	}
+  }
   emailValidator(c: AbstractControl): ValidationErrors | null {
 	const emailCtrl = c.get('email') as FormControl;
 	const confirm = c.get('confirmEmail');
@@ -131,7 +146,9 @@ export class DialogComponent implements OnInit {
   // 	}
   // 		return null;
   //   }
-  onClose() {}
+  onClose() {
+	// this.router.navigate();
+  }
 
   onSave() {}
 }
