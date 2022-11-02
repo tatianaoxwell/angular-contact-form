@@ -52,7 +52,7 @@
 			Please enter a valid rating between 1 and 5.
 		</mat-error>
 		<mat-error *ngIf="ratingCtrl.hasError('required')">
-			Rating is <strong>required</strong>
+			{{ratingMessage}}
 		</mat-error>
 	</mat-form-field>
 	<section class="form__group" class="example-section">
