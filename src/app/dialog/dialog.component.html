@@ -1,66 +1,63 @@
-<h1 mat-dialog-title>Sign Up!</h1>
-<form class="form" mat-dialog-content [formGroup]="signupForm">
-	<mat-form-field class="form__group" appearance="outline">
-		<mat-label class="form__group-title">First Name</mat-label>
-		<input class="form__group-input" matInput placeholder="First Name (required)" formControlName="firstName">
-		<mat-icon matSuffix></mat-icon>
-	</mat-form-field>
-	<mat-form-field class="form__group" appearance="outline">
-		<mat-label class="form__group-title">Last Name</mat-label>
-		<input class="form__group-input" formControlName="lastName" matInput placeholder="Last Name (required)"
-			   required>
-		<mat-icon matSuffix></mat-icon>
-	</mat-form-field>
-	<form formGroupName="emailGroup">
+<div class="container">
+	<h1 mat-dialog-title class="container-title" >Sign Up!</h1>
+	<form class="form" mat-dialog-content [formGroup]="signupForm">
 		<mat-form-field class="form__group" appearance="outline">
-			<mat-label class="form__group-title">Email</mat-label>
-			<input class="form__group-input" formControlName="email" matInput placeholder="Email">
+			<mat-label class="form__group-title">First Name</mat-label>
+			<input class="form__group-input" matInput placeholder="First Name (required)" formControlName="firstName">
 			<mat-icon matSuffix></mat-icon>
 		</mat-form-field>
 		<mat-form-field class="form__group" appearance="outline">
-			<mat-label class="form__group-title">Confirm Email</mat-label>
-			<input class="form__group-input" formControlName="confirmEmail" matInput placeholder="Confirm Email">
-			<!-- <mat-error *ngIf="emailGroupCtrl.controls.email.errors?.required">
-				Confirmation email is <strong>required</strong>
+			<mat-label class="form__group-title">Last Name</mat-label>
+			<input class="form__group-input" formControlName="lastName" matInput placeholder="Last Name (required)"
+				   required>
+			<mat-icon matSuffix></mat-icon>
+		</mat-form-field>
+		<form formGroupName="emailGroup">
+			<mat-form-field class="form__group" appearance="outline">
+				<mat-label class="form__group-title">Email</mat-label>
+				<input class="form__group-input" formControlName="email" matInput placeholder="Email">
+				<mat-icon matSuffix></mat-icon>
+			</mat-form-field>
+			<mat-form-field class="form__group" appearance="outline">
+				<mat-label class="form__group-title">Confirm Email</mat-label>
+				<input class="form__group-input" formControlName="confirmEmail" matInput placeholder="Confirm Email">
+				<mat-icon matSuffix></mat-icon>
+			</mat-form-field>
+		</form>
+		<mat-form-field class="form__group" appearance="outline">
+			<mat-label class="form__group-title">Mobile Number</mat-label>
+			<input class="form__group-input" formControlName="mobileNumber" matInput placeholder="Name">
+			<mat-icon matSuffix></mat-icon>
+		</mat-form-field>
+		<div class="form__group">
+			<label class="form__group-title">
+				<p>Send Notifications</p>
+			</label>
+			<mat-radio-group class="form__group" aria-label="Select an option" formControlName="notification">
+				<mat-radio-button class="form__radio" value="email">Email</mat-radio-button>
+				<br>
+				<mat-radio-button class="form__radio" value="text">Text</mat-radio-button>
+			</mat-radio-group>
+		</div>
+		<mat-form-field class="form__group form__group-rating-field" appearance="outline">
+			<mat-label class="form__group-rating">Rate your experience with us on a scale of 1 (poor) to 5 (great):
+			</mat-label>
+			<input matInput type="number" placeholder="Rating" formControlName="rating">
+			<mat-error *ngIf="ratingCtrl.hasError('ratingValidator') && !ratingCtrl.hasError('required')">
+				Please enter a valid rating between 1 and 5.
 			</mat-error>
-		<mat-error *ngIf="emailGroupCtrl.hasError('emailValidator')" >
-				The confirmation does not match the email address. 
-			</mat-error> -->
-			<mat-icon matSuffix></mat-icon>
+			<mat-error *ngIf="ratingCtrl.hasError('required')">
+				{{ratingMessage}}
+			</mat-error>
 		</mat-form-field>
+		<section class="form__group" class="example-section">
+			<mat-checkbox class="form__checkbox" formControlName="sendCatalog">Send me your catalog</mat-checkbox>
+		</section>
+		<mat-dialog-actions class="form__group">
+			<button mat-raised-button color="primary" type="button" class="form__button-close"
+					(click)="onClose()">Close</button>
+			<button mat-raised-button color="primary" type="button" class="form__button-save" [disabled]="!signupForm.valid"
+					(click)="onSave()">Save</button>
+		</mat-dialog-actions>
 	</form>
-	<mat-form-field class="form__group" appearance="outline">
-		<mat-label class="form__group-title">Mobile Number</mat-label>
-		<input class="form__group-input" formControlName="mobileNumber" matInput placeholder="Name">
-		<mat-icon matSuffix></mat-icon>
-	</mat-form-field>
-	<div class="form__group">
-		<label class="form__group-title">
-			<p>Send Notifications</p>
-		</label>
-		<mat-radio-group class="form__group" aria-label="Select an option" formControlName="notification">
-			<mat-radio-button class="form__radio" value="email">Email</mat-radio-button>
-			<br>
-			<mat-radio-button class="form__radio" value="text">Text</mat-radio-button>
-		</mat-radio-group>
-	</div>
-	<mat-form-field class="form__group form__group-rating-field" appearance="outline">
-		<mat-label class="form__group-rating">Rate your experience with us on a scale of 1 (poor) to 5 (great):
-		</mat-label>
-		<input matInput type="number" placeholder="Rating" formControlName="rating">
-		<mat-error *ngIf="ratingCtrl.hasError('ratingValidator') && !ratingCtrl.hasError('required')">
-			Please enter a valid rating between 1 and 5.
-		</mat-error>
-		<mat-error *ngIf="ratingCtrl.hasError('required')">
-			{{ratingMessage}}
-		</mat-error>
-	</mat-form-field>
-	<section class="form__group" class="example-section">
-		<mat-checkbox class="form__checkbox" formControlName="sendCatalog">Send me your catalog</mat-checkbox>
-	</section>
-	<mat-dialog-actions class="form__group">
-		<button mat-raised-button color="primary" type="button" class="form__button" (click)="onClose()">Close</button>
-		<button mat-raised-button color="primary" type="button" class="form__button" [disabled]="!signupForm.valid"
-				(click)="onSave()">Save</button>
-	</mat-dialog-actions>
-</form>
+</div>
